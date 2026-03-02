@@ -2,10 +2,7 @@ name: Update Table of Contents
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'Resources/**'
-      - '.github/workflows/update-toc.yml'
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -13,34 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+    - name: Make script executable
+      run: chmod +x scripts/update-toc.sh
     
-    - name: Install dependencies
-      run: |
-        npm install -g marked toc-generator
-        
-    - name: Generate TOC
-      run: |
-        # This is a placeholder - in reality, you'd use a custom script
-        # to parse Resources directory and generate the table
-        echo "Generating table of contents..."
-        
-    - name: Commit changes
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add README.md
-        git diff --staged --quiet || git commit -m "docs: auto-update table of contents [skip ci]"
-        
-    - name: Push changes
-      run: |
-        git push
+    - name: Run TOC update script
+      run: ./scripts/update-toc.sh
+    
+    - name: Commit changes if any
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "chore: auto-update README table of contents"
+        skip_dirty_check: true
