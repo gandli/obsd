@@ -1,0 +1,27 @@
+{
+  "name": "obsidian-vault",
+  "version": "1.0.0",
+  "description": "> Personal Knowledge Management System - PARA Method + OpenClaw Automation + GitHub Version Control",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gandli/obsd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gandli/obsd/issues"
+  },
+  "homepage": "https://github.com/gandli/obsd#readme",
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "glob": "^13.0.6",
+    "markdown-toc": "^1.2.0",
+    "path": "^0.12.7"
+  }
+}
